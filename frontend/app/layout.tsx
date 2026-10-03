@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
+import { DM_Sans, Newsreader } from "next/font/google";
 
-import { DM_Sans, Newsreader, Geist } from "next/font/google";
+import { PrototypeProvider } from "@/lib/types/prototype-store";
+import { Toaster } from "sonner";
 
 import "./globals.css";
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const dmSans = DM_Sans({
     variable: "--font-dm-sans",
@@ -18,8 +17,9 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-    title: "Your App",
-    description: "Your app description",
+    title: "Folio",
+    description:
+        "Thoughtful stories on design, culture, and the way we live.",
 };
 
 export default function RootLayout({
@@ -30,10 +30,14 @@ export default function RootLayout({
     return (
         <html
             lang="en"
-            className={cn("h-full", "antialiased", dmSans.variable, newsreader.variable, "font-sans", geist.variable)}
+            className={`${dmSans.variable} ${newsreader.variable} antialiased`}
         >
-            <body className="min-h-full flex flex-col">
-                {children}
+            <body className="min-h-full">
+                <PrototypeProvider>
+                    {children}
+                </PrototypeProvider>
+
+                <Toaster />
             </body>
         </html>
     );

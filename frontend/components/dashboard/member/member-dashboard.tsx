@@ -113,7 +113,7 @@ export function MemberDashboard() {
                                 </p>
 
                                 <Button>
-                                    <Link href="/dashboard/member/request-role">
+                                    <Link href="/dashboard/member/request-role" className="flex items-center gap-1">
                                         {pendingRequest
                                             ? "View request status"
                                             : "Request editor access"}

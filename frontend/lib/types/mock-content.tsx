@@ -1,6 +1,4 @@
-import architecture from "@/assets/editorial-architecture.jpg";
-import design from "@/assets/editorial-design.jpg";
-import culture from "@/assets/editorial-culture.jpg";
+
 
 export const articles = [
     {
@@ -12,7 +10,7 @@ export const articles = [
         author: "Elena Rivers",
         date: "Sep 18, 2026",
         readTime: "8 min read",
-        image: architecture,
+        image: "/img/editorial-architecture.jpg",
         status: "Published",
     },
     {
@@ -24,7 +22,7 @@ export const articles = [
         author: "Marcus Chen",
         date: "Sep 14, 2026",
         readTime: "6 min read",
-        image: design,
+        image: "/img/editorial-design.jpg",
         status: "Published",
     },
     {
@@ -36,7 +34,7 @@ export const articles = [
         author: "Amara Okafor",
         date: "Sep 10, 2026",
         readTime: "5 min read",
-        image: culture,
+        image: "/img/editorial-culture.jpg",
         status: "Published",
     },
     {
@@ -48,7 +46,7 @@ export const articles = [
         author: "Sophie Laurent",
         date: "Sep 7, 2026",
         readTime: "7 min read",
-        image: design,
+        image: "/img/editorial-design.jpg",
         status: "Published",
     },
     {
@@ -60,7 +58,7 @@ export const articles = [
         author: "Daniel Foster",
         date: "Sep 3, 2026",
         readTime: "9 min read",
-        image: culture,
+        image: "/img/editorial-culture.jpg",
         status: "Published",
     },
 ];

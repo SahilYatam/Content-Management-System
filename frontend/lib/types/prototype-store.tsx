@@ -12,9 +12,6 @@ import {
     type ReactNode,
 } from "react";
 
-import architecture from "@/assets/editorial-architecture.jpg";
-import design from "@/assets/editorial-design.jpg";
-import culture from "@/assets/editorial-culture.jpg";
 import {
     articles as seedArticles,
     type CardArticle,
@@ -121,9 +118,9 @@ export type ArticleInput = {
 };
 
 export const coverImages = [
-    { key: "architecture", src: architecture.src, label: "Architecture" },
-    { key: "design", src: design.src, label: "Interior" },
-    { key: "culture", src: culture.src, label: "City" },
+    { key: "architecture", src: "/img/editorial-architecture.jpg", label: "Architecture" },
+    { key: "design", src: "/img/editorial-design.jpg", label: "Interior" },
+    { key: "culture", src: "/img/editorial-culture.jpg", label: "City" },
 ];
 
 export const categories = ["Design", "Culture", "Ideas", "Perspective"];
@@ -264,7 +261,7 @@ const createInitialState = (): StoreState => ({
             category: "Ideas",
             tags: ["Creativity", "Process"],
             content: seedBody,
-            image: design.src,
+            image: "/img/editorial-design.jpg",
             authorId: DEFAULT_EDITOR_ID,
             status: "Pending Review",
             createdAt: toIso("2026-09-16T09:00:00Z"),
@@ -280,7 +277,7 @@ const createInitialState = (): StoreState => ({
             category: "Culture",
             tags: ["Essay"],
             content: seedBody.split("\n\n").slice(0, 3).join("\n\n"),
-            image: culture.src,
+            image: "/img/editorial-culture.jpg",
             authorId: DEFAULT_EDITOR_ID,
             status: "Draft",
             createdAt: toIso("2026-09-15T09:00:00Z"),
@@ -294,7 +291,7 @@ const createInitialState = (): StoreState => ({
             category: "Perspective",
             tags: [],
             content: "",
-            image: architecture.src,
+            image: "/img/editorial-architecture.jpg",
             authorId: DEFAULT_EDITOR_ID,
             status: "Draft",
             createdAt: toIso("2026-09-12T09:00:00Z"),
@@ -309,7 +306,7 @@ const createInitialState = (): StoreState => ({
             category: "Design",
             tags: ["Architecture", "Light"],
             content: seedBody,
-            image: architecture.src,
+            image: "/img/editorial-architecture.jpg",
             authorId: "u-marcus",
             status: "Pending Review",
             createdAt: toIso("2026-09-24T09:00:00Z"),

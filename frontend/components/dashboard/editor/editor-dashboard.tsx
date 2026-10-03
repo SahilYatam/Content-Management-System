@@ -54,7 +54,7 @@ export function EditorDashboard() {
                 </p>
 
                 <Button>
-                    <Link href="/dashboard/editor/articles/new">
+                    <Link href="/dashboard/editor/articles/new" className="flex items-center gap-1">
                         <Plus size={17} />
                         Create article
                     </Link>
