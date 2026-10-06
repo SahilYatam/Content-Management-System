@@ -14,6 +14,7 @@ export const USER_STATUS = {
 export type UserStatus = (typeof USER_STATUS)[keyof typeof USER_STATUS];
 
 export interface IUser {
+    name: string;
     username: string;
     email: string;
     passwordHash: string;
@@ -27,6 +28,12 @@ export type UserDocument = HydratedDocument<IUser>;
 
 const userSchema = new Schema<IUser>(
     {
+        name: {
+            type: String,
+            required: true,
+            trim: true,
+        }, 
+        
         username: {
             type: String,
             required: true,
