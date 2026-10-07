@@ -4,6 +4,26 @@ import { setCookies, clearCookies } from "../session/cookies.js";
 import { userService } from "./user.service.js";
 import { sessionService } from "../session/session.service.js";
 
+const getUser = asyncHandler(async (req: Request, res: Response) => {
+    const userId = req.user?._id;
+
+    const user = await userService.getUser(userId);
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(20, { user }, "User details fetched Successful!"),
+        );
+});
+
+const geAlltUser = asyncHandler(async (req: Request, res: Response) => {
+    const users = await userService.getAllUsers();
+
+    return res
+        .status(200)
+        .json(new ApiResponse(20, { users }, "All users fetched Successful!"));
+});
+
 const login = asyncHandler(async (req: Request, res: Response) => {
     const { email, password } = req.body;
     const user = await userService.login(email, password);
@@ -36,9 +56,7 @@ const signUp = asyncHandler(async (req: Request, res: Response) => {
 
     return res
         .status(201)
-        .json(
-            new ApiResponse(201, { user }, "Signup Successful!"),
-        );
+        .json(new ApiResponse(201, { user }, "Signup Successful!"));
 });
 
 const logout = asyncHandler(async (req: Request, res: Response) => {
@@ -51,6 +69,8 @@ const logout = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const userController = {
+    getUser,
+    geAlltUser,
     login,
     signUp,
     logout,

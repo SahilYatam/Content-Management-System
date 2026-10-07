@@ -14,6 +14,8 @@ import {
     notFoundHandler,
 } from "./middlewares/globalErrorHandler.js";
 
+import { userRouter } from "./modules/user/user.routes.js";
+import { sessionRouter } from "./modules/session/session.routes.js";
 
 export const app = express();
 
@@ -50,6 +52,9 @@ function limiter(windowMs: number, max: number) {
 
 const globalRateLimiting = limiter(15 * 60 * 1000, 1000); // 15 minutes, 1000 requests
 app.use(globalRateLimiting);
+
+app.use("/api/user", userRouter);
+app.use("/api/session", sessionRouter);
 
 app.get("/api/v1/test", (req, res) => {
     res.json({

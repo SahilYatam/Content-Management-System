@@ -6,14 +6,19 @@ import {
 import { hashToken } from "../session/jwt.js";
 import { sessionRepo } from "../session/session.repository.js";
 import { USER_STATUS } from "./user.model.js";
-import { UserAuth, UserInput, userRepo } from "./user.repository.js";
+import {
+    UserAuth,
+    UserInput,
+    userRepo,
+    UserSummary,
+} from "./user.repository.js";
 
 type PublicUser = Pick<
-    UserAuth,
+    UserSummary,
     "_id" | "name" | "username" | "email" | "role" | "status"
 >;
 
-const toPublicUser = (user: UserAuth): PublicUser => ({
+const toPublicUser = (user: UserSummary): PublicUser => ({
     _id: user._id,
     name: user.name,
     username: user.username,
@@ -21,6 +26,29 @@ const toPublicUser = (user: UserAuth): PublicUser => ({
     role: user.role,
     status: user.status,
 });
+
+const getUser = async (userId: string) => {
+    if(!userId){
+        throw new ApiError(401, "User id is not defined!");
+    }
+
+    const user = await userRepo.findUserById(userId);
+    if (!user) {
+        throw new ApiError(404, "User not found!");
+    }
+
+    return toPublicUser(user);
+};
+
+const getAllUsers = async () => {
+    const users = await userRepo.findAllUsers();
+
+    if (users.length === 0) {
+        return { message: "0 users in db" };
+    }
+
+    return users.map((u) => toPublicUser(u));
+};
 
 const login = async (email: string, password: string) => {
     const user = await userRepo.findUserForLogin(email.toLowerCase().trim());
@@ -39,15 +67,7 @@ const login = async (email: string, password: string) => {
         throw new ApiError(403, "Account is suspended!");
     }
 
-    return toPublicUser({
-        _id: user._id,
-        name: user.name,
-        username: user.username,
-        email: user.email,
-        passwordHash: user.passwordHash,
-        role: user.role,
-        status: user.status,
-    });
+    return toPublicUser(user);
 };
 
 const signUp = async (data: UserInput) => {
@@ -68,15 +88,7 @@ const signUp = async (data: UserInput) => {
         passwordHash: (await hasehdPassword).toString(),
     });
 
-    return toPublicUser({
-        _id: user._id,
-        name: user.name,
-        username: user.username,
-        email: user.email,
-        passwordHash: user.passwordHash,
-        role: user.role,
-        status: user.status,
-    });
+    return toPublicUser(user);
 };
 
 const logout = async (refreshToken: string) => {
@@ -91,6 +103,8 @@ const logout = async (refreshToken: string) => {
 };
 
 export const userService = {
+    getUser,
+    getAllUsers,
     login,
     signUp,
     logout,
